@@ -3,8 +3,9 @@ jQuery(document).ready(function($) {
     // var cels = Math.round( parseFloat(weather) * 100) / 100;
     // $('#celcius').text(cels);
 
-    var text = "I am 42 years old and my name is Julian";
+    var text = "What should I wear?"; //default query
     $("#input").val(text);
+
     setup();
     api_ai();
 
@@ -16,6 +17,13 @@ function setup(){
   $('input[type="text"]')
       .keyup(resizeInput)// event handler
       .each(resizeInput);// resize on page load
+
+  //keylistener (enter)
+  $('#input').keypress(function(e){
+      if (e.which == 13){
+          api_ai();
+      }
+  });
 }
 
 //Dynamic input field
@@ -44,7 +52,22 @@ function triggerAction(action){
 
 //Give cloth  suggestion based on temperature
 function suggestClothes(temp){
-  $('#wear').text('It is ' + temp + '*C outside, you should wear a Jacket');
+  var clothing;
+  //Is to be replaced with ML technique
+  if(temp > 20){
+    clothing = 'preferably nothing';
+  }else if(temp > 10){
+    clothing = 'something light, a t-shirt';
+  }else if(temp > 5){
+    clothing = 'a sweater of course';
+  }else if(temp > 0){
+    clothing = ' a jacket, that will do!';
+  }else if(temp > -5){
+    clothing = 'a jacket, hat and a scarf';
+  }else{
+    clothing = ' everything you got!';
+  }
+  $('#wear').text('It is ' + temp + '*C outside, you should wear ' + clothing);
 }
 
 //Returns random weather
