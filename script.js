@@ -8,7 +8,6 @@ jQuery(document).ready(function($) {
     setup();
     api_ai();
 
-
 });
 
 //Setup function
@@ -81,6 +80,7 @@ function request(baseUrl, accessToken, text){
     data: JSON.stringify({ q: text, lang: "en" }),
     success: function(data) {
       $('#action').text('action: ' +  data.result.action);
+      $('#json').text('action: ' +  JSON.stringify(data, null, 2));
       triggerAction(data.result.action);
       setResponse('Output: ' + JSON.stringify(data.result.fulfillment.speech, undefined, 2));
     },
