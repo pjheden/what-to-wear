@@ -7,9 +7,9 @@
 
 <head>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type="text/javascript" src="./script.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -20,15 +20,15 @@
     <p> *C </p>
   </div> -->
     <h2> API AI </h2> Input: <input id="input" type="text">
-    <button class="btn btn-info">Mic</button>
+    <button class="btn btn-info" id="mic" onclick='startRecognition()'>Mic</button>
     <button onclick="api_ai()" class="btn btn-primary">Send</button>
     <div class="checkbox">
-        <label><input type="checkbox" value="isSpeech">Speech</label>
+        <label><input type="checkbox" value="isSpeech" checked>Speech on/off</label>
     </div>
     <p id="response"></p>
     <p id="action"></p>
     <p id="wear"></p>
-    JSON Response:
+    <h4>JSON Response debug:</h4>
     <p id="json" style="width: 20%"></p>
 </body>
 

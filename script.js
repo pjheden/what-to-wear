@@ -1,3 +1,4 @@
+
 jQuery(document).ready(function($) {
     // var weather = getRandomWeather();
     // var cels = Math.round( parseFloat(weather) * 100) / 100;
@@ -10,6 +11,54 @@ jQuery(document).ready(function($) {
     api_ai();
 
 });
+
+var recognition;
+function startRecognition(){
+  recognition = new webkitSpeechRecognition();
+  recognition.onstart = function(event) {
+    $('#mic').toggleClass('btn-info', false);
+    $('#mic').toggleClass('btn-warning', true);
+  };
+  recognition.onresult = function(event) {
+    var text = "";
+      for (var i = event.resultIndex; i < event.results.length; ++i) {
+        text += event.results[i][0].transcript;
+        console.log('mic confidence: ', event.results[i][0].confidence);
+      }
+    $('#input').val(text);
+    stopRecognition();
+    api_ai();
+
+  };
+  recognition.onend = function() {
+    stopRecognition();
+  };
+  recognition.lang = "en-US";
+  recognition.start();
+}
+
+function switchRecognition() {
+  if (recognition) {
+    stopRecognition();
+  } else {
+    startRecognition();
+  }
+}
+
+function stopRecognition() {
+  if (recognition) {
+    $('#mic').toggleClass('btn-info', true);
+    $('#mic').toggleClass('btn-warning', false);
+    recognition.stop();
+    recognition = null;
+  }
+}
+
+//voice response
+function voiceResponse(text){
+  var msg = new SpeechSynthesisUtterance(text);
+  window.speechSynthesis.speak(msg);
+}
 
 //Setup function
 function setup(){
@@ -67,7 +116,9 @@ function suggestClothes(temp){
   }else{
     clothing = ' everything you got!';
   }
-  $('#wear').text('It is ' + temp + '*C outside, you should wear ' + clothing);
+  var response = 'It is ' + temp + '*C outside, you should wear ' + clothing;
+  voiceResponse(response);
+  $('#wear').text(response);
 }
 
 //Returns random weather
