@@ -56,16 +56,18 @@ function stopRecognition() {
 
 //voice response
 function voiceResponse(text){
-  var msg = new SpeechSynthesisUtterance();
-  var voices = window.speechSynthesis.getVoices();
-  msg.voice = voices[10]; // Note: some voices don't support altering params
-  msg.voiceURI = 'native';
-  msg.volume = 1; // 0 to 1
-  msg.rate = 1; // 0.1 to 10
-  msg.pitch = 2; //0 to 2
-  msg.text = text;
-  msg.lang = 'en-US';
-  speechSynthesis.speak(msg);
+  if($('#speech')[0].checked){
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10]; // Note: some voices don't support altering params
+    msg.voiceURI = 'native';
+    msg.volume = 1; // 0 to 1
+    msg.rate = 1; // 0.1 to 10
+    msg.pitch = 2; //0 to 2
+    msg.text = text;
+    msg.lang = 'en-US';
+    speechSynthesis.speak(msg);
+  }
 }
 
 //Setup function
@@ -124,7 +126,7 @@ function suggestClothes(temp){
   }else{
     clothing = ' everything you got!';
   }
-  var response = 'It is ' + temp + '*C outside, you should wear ' + clothing;
+  var response = 'It is ' + temp + ' degrees outside, you should wear ' + clothing;
   voiceResponse(response);
   $('#wear').text(response);
 }
@@ -164,6 +166,9 @@ function request(baseUrl, accessToken, text){
       $('#action').text('action: ' +  data.result.action);
       $('#json').text('action: ' +  JSON.stringify(data, null, 2));
       triggerAction(data.result.action);
+      if(data.result.action != 'weather-action'){
+        voiceResponse(data.result.fulfillment.speech);
+      }
       setResponse('Output: ' + JSON.stringify(data.result.fulfillment.speech, undefined, 2));
     },
     error: function() {
