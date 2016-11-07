@@ -72,6 +72,7 @@ function voiceResponse(text){
 
 //Setup function
 function setup(){
+  $('#json').hide();
   //Make input field dynamic
   $('input[type="text"]')
       .keyup(resizeInput)// event handler
@@ -182,6 +183,18 @@ function setResponse(val) {
   $("#response").text(val);
 }
 
+var visible = false;
+function toggleJSONDebug() {
+  if(visible){
+     $('#json').hide();
+     $('#jsonBtn')[0].innerHTML = "Show";
+    visible = false;
+  }else{
+    $('#json').show();
+    $('#jsonBtn')[0].innerHTML = "Hide";
+    visible = true;
+  }
+}
 
 //TEMP UNUSEd and not funcitonal
  function getAutoCompleteValues() {

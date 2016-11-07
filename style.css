@@ -6,3 +6,10 @@ body {
 h1, h2, h3, h4 {
   color: blue;
 }
+
+.container {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 2em;
+  margin-top: 2em;
+}
