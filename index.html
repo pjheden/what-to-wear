@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type="text/javascript" src="./js/script.js"></script>
     <script type="text/javascript" src="./js/data.js"></script>
+    <script type="text/javascript" src="./js/training.js"></script>
 </head>
 
 <body>
@@ -20,8 +21,11 @@
     <p id="celcius"></p>
     <p> *C </p>
   </div> -->
+
+    <!-- Input section -->
     <div class="container">
-        Input: <input id="input" type="text">
+        <h3>Input</h3>
+        <input id="input" type="text">
         <button class="btn btn-info" id="mic" onclick='startRecognition()'>Mic</button>
         <button onclick="api_ai()" class="btn btn-primary">Send</button>
         <div class="checkbox">
@@ -29,14 +33,37 @@
         </div>
     </div>
 
+    <!-- Response section -->
     <div class="container">
+        <h3>Output</h3>
         <p id="wear"></p>
         <p id="response"></p>
         <p id="action"></p>
     </div>
 
+    <!-- Training section -->
+    <div class="container containerT" id="trainingC">
+        <h3>Training <button onclick="" class="btn btn-primary" id="saveBtn">Save</button></h3>
+        <!--    TEMPLATE -->
+        <div class="trainingContainer">
+            <p>Day 1</p>
+            <form>
+                Temperature(Celsius):<br>
+                <input type="text" name="temperature"><br> Clothes:
+                <br>
+                <select id="mySel">
+                  <option value="1">T-shirt</option>
+                  <option value="2">Sweater</option>
+                  <option value="3">T-shirt and a Jacket</option>
+                  <option value="4">Sweater and a Jacket</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <!-- Debug section -->
     <div class="container">
-        <h2> JSON DEBUG <button onclick="toggleJSONDebug()" class="btn btn-primary" id="jsonBtn">Show</button></h2>
+        <h3> JSON DEBUG <button onclick="toggleJSONDebug()" class="btn btn-primary" id="jsonBtn">Show</button></h3>
         <p id="json"></p>
     </div>
 

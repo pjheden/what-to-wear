@@ -12,7 +12,6 @@ jQuery(document).ready(function($) {
     }
 });
 
-
 function saveData(key, value) {
     if (storageSupport) localStorage.setItem(key, value);
 }
