@@ -61,8 +61,14 @@ function saveForms() {
     })
 
     for (var i = 0; i < temps.length; i++) {
+      if(temps[i] && clothings[i] && is_numeric(temps[i]))
         saveData(temps[i], clothings[i]);
     }
+}
+
+//Checks that a string holds numeric values
+function is_numeric(str){
+    return /^\d+$/.test(str);
 }
 
 function buttonConfirmationAnimation() {
