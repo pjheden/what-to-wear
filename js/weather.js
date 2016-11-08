@@ -44,6 +44,9 @@ function fetchWeather() {
                 dataType: "jsonp",
                 success: function(parsed_json) {
                   console.log(parsed_json);
+                  if(parsed_json['response']['error']){
+                    reject('Error');
+                  }
                     var temp = {
                         real: undefined,
                         feel: undefined
