@@ -5,7 +5,6 @@ jQuery(document).ready(function($) {
     setup();
     api_ai();
 
-    getWeather(); //TEST
 });
 
 

@@ -29,6 +29,8 @@ function kNearestNeighbours(temperature) {
             closest_key = keys[i];
         }
     }
+    console.log('closest', closest_key);
+    console.log('temperature', temperature);
     return getData(closest_key);
 }
 
@@ -69,8 +71,6 @@ function saveForms() {
     })
 
     for (var i = 0; i < temps.length; i++) {
-      console.log('trying to save', temps[i]);
-      console.log('numeric?', is_numeric(temps[i]));
         if (temps[i] && clothings[i] && is_numeric(temps[i]))
             saveData(temps[i], clothings[i]);
     }

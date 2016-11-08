@@ -18,12 +18,12 @@ function getWeather() {
     return promise;
 }
 
-function getCountry(){
-  return country;
+function getCountry() {
+    return country;
 }
 
-function getCity(){
-  return city;
+function getCity() {
+    return city;
 }
 
 //Returns random weather
@@ -40,20 +40,22 @@ function fetchWeather() {
     var promise = new Promise(
         function(resolve, reject) {
             $.ajax({
-                url: baseUrl + apiKey + "/geolookup/conditions/q/"+country +'/'+ city +".json",
+                url: baseUrl + apiKey + "/geolookup/conditions/q/" + country + '/' + city + ".json",
                 dataType: "jsonp",
                 success: function(parsed_json) {
-                  console.log(parsed_json);
-                  if(parsed_json['response']['error']){
-                    reject('Error');
-                  }
-                    var temp = {
-                        real: undefined,
-                        feel: undefined
-                    };
-                    temp.real = parsed_json['current_observation']['temp_c'];
-                    temp.feel = parsed_json['current_observation']['feelslike_c'];
-                    resolve(temp);
+                    console.log(parsed_json);
+                    if (parsed_json['response']['error']) {
+                        reject('Error');
+                    } else {
+
+                        var temp = {
+                            real: undefined,
+                            feel: undefined
+                        };
+                        temp.real = parsed_json['current_observation']['temp_c'];
+                        temp.feel = parsed_json['current_observation']['feelslike_c'];
+                        resolve(temp);
+                    }
                 },
                 error: function() {
                     reject('Error, weather request timed out');
