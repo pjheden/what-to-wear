@@ -7,17 +7,11 @@ Thus, you will input what you wore and if you were cold/warm for a few days and 
 Register at and Weather Underground for an api key.
 Then create ./js/keys.js and add the following text:
 
-function getAiKey(){
-  return your_api_key;
-}
-
 function getWeatherKey(){
   return your_weather_key;
 }
 
 ## Libraries
-
-HTML5 webkitSpeechRecognition for STT: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
 
 Weather Underground for weather: https://www.wunderground.com/?apiref=c9efedbf428785a3
 

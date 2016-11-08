@@ -15,7 +15,6 @@
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/data.js"></script>
     <script type="text/javascript" src="./js/training.js"></script>
-    <script type="text/javascript" src="./js/webkitspeech.js"></script>
     <script type="text/javascript" src="./js/weather.js"></script>
 </head>
 
@@ -47,13 +46,15 @@
 
 
     <!-- Training section-->
-        <div class="w3-card-2" id="trainingC">
+    <div class="container containerT w3-panel w3-card-8" style="width:30%;">
+        <div class="w3-card-2" style="width:100%" id="trainingC">
           <h3>Training
             <button onclick="toggleTraining()" class="btn btn-primary" id="trainBtn">Show</button>
             <button onclick="saveForms()" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
             <button onclick="addForm()" class="btn btn-primary" id="plusBtn" style="display:none;">+</button>
           </h3>
         </div>
+    </div>
 
 </body>
 

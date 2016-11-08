@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
     weather_action();
+    if(isMobileUser()){
+      $('.container').css('width','100%');
+    }
 });
 
 function isMobileUser(){
@@ -17,6 +20,7 @@ function weather_action() {
         },
         function(error) {
             console.error(error);
+            weather_action();
         });
 }
 

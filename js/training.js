@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
     var keys = getAllKeys();
+    console.log(keys);
     //Load all saved data
     if (keys.length != 0) {
         for (var i = 0; i < keys.length; i++) {
