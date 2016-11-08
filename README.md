@@ -24,4 +24,7 @@ CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 3. Sort training data by temperature
 4. Add weather visuals
 5. Make mobile friendly
+  1. Make font size change
+  2. Make edit forms size change
+6. add equal padding
 7. Make save button yellow upon any changes to suggest unsaved changes
