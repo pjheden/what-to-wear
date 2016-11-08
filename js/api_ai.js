@@ -1,7 +1,7 @@
 //Calls api.ai with text from input field
 function api_ai() {
     var baseUrl = "https://api.api.ai/v1/";
-    var accessToken = "8f0185b6409b4e6c80908067211cc560"; //client token
+    var accessToken = getAiKey(); //client token
     var text = $("#input").val();
     //var lang = "en-US";
     request(baseUrl, accessToken, text);

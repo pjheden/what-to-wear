@@ -1,4 +1,4 @@
-var apiKey = '60be2003867989ab';
+var apiKey = getWeatherKey();
 var baseUrl = 'http://api.wunderground.com/api/';
 var country = 'Sweden';
 var city = 'Stockholm';
