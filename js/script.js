@@ -11,64 +11,6 @@ jQuery(document).ready(function($) {
 
 });
 
-var recognition;
-
-function startRecognition() {
-    recognition = new webkitSpeechRecognition();
-    recognition.onstart = function(event) {
-        $('#mic').toggleClass('btn-info', false);
-        $('#mic').toggleClass('btn-warning', true);
-    };
-    recognition.onresult = function(event) {
-        var text = "";
-        for (var i = event.resultIndex; i < event.results.length; ++i) {
-            text += event.results[i][0].transcript;
-            console.log('mic confidence: ', event.results[i][0].confidence);
-        }
-        $('#input').val(text);
-        stopRecognition();
-        api_ai();
-
-    };
-    recognition.onend = function() {
-        stopRecognition();
-    };
-    recognition.lang = "en-US";
-    recognition.start();
-}
-
-function switchRecognition() {
-    if (recognition) {
-        stopRecognition();
-    } else {
-        startRecognition();
-    }
-}
-
-function stopRecognition() {
-    if (recognition) {
-        $('#mic').toggleClass('btn-info', true);
-        $('#mic').toggleClass('btn-warning', false);
-        recognition.stop();
-        recognition = null;
-    }
-}
-
-//voice response
-function voiceResponse(text) {
-    if ($('#speech')[0].checked) {
-        var msg = new SpeechSynthesisUtterance();
-        var voices = window.speechSynthesis.getVoices();
-        msg.voice = voices[10]; // Note: some voices don't support altering params
-        msg.voiceURI = 'native';
-        msg.volume = 1; // 0 to 1
-        msg.rate = 1; // 0.1 to 10
-        msg.pitch = 2; //0 to 2
-        msg.text = text;
-        msg.lang = 'en-US';
-        speechSynthesis.speak(msg);
-    }
-}
 
 //Setup function
 function setup() {
@@ -95,13 +37,13 @@ function resizeInput() {
 function triggerAction(action) {
     switch (action) {
         case "weather-action":
-            var weather = getRandomWeather();
-            var cels = Math.round(parseFloat(weather) * 100) / 100;
-            suggestClothes(cels);
+              weather_action();
             break;
         case "user-information":
+            //TODO add username and age
             break;
         case "temperature-training":
+            //TODO add support for voice training
             break;
         default:
             console.log('unsuported action', action);
@@ -109,8 +51,24 @@ function triggerAction(action) {
     }
 }
 
+function weather_action() {
+  var weather = getRandomWeather();
+  var cels = Math.round(parseFloat(weather) * 100) / 100;
+  suggestClothes(cels);
+}
+
 //Give cloth  suggestion based on temperature
 function suggestClothes(temp) {
+    var clothing;
+    clothing = getCloth( kNearestNeighbours(temp) );
+    var response = 'It is ' + temp + ' degrees outside, you should wear ' + clothing;
+    voiceResponse(response);
+    $('#wear').text(response);
+}
+
+
+//Give cloth  suggestion based on temperature
+function suggestClothes2(temp) {
     var clothing;
     //Is to be replaced with ML technique
     if (temp > 20) {
@@ -200,23 +158,23 @@ function toggleJSONDebug() {
 }
 
 //TEMP UNUSEd and not funcitonal
-function getAutoCompleteValues() {
-    var apiKey = "HnO9QoL2n5nownET8nROzJkvNh8AZ1aA";
-    var locationUrl = "http://apidev.accuweather.com/locations/v1/search?q=" + "Stockholm, Sweden" + "&apikey=" + apiKey;
-    console.log(locationUrl);
-    $.ajax({
-        type: "GET",
-        url: locationUrl,
-        dataType: "jsonp",
-        cache: true, // Use cache for better reponse times
-        jsonpCallback: "awxCallback", // Prevent unique callback name for better reponse times
-        success: function(data) {
-            console.log(data);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log("error!");
-            alert("Status: " + textStatus);
-            alert("Error: " + errorThrown);
-        }
-    });
-}
+// function getAutoCompleteValues() {
+//     var apiKey = "HnO9QoL2n5nownET8nROzJkvNh8AZ1aA";
+//     var locationUrl = "http://apidev.accuweather.com/locations/v1/search?q=" + "Stockholm, Sweden" + "&apikey=" + apiKey;
+//     console.log(locationUrl);
+//     $.ajax({
+//         type: "GET",
+//         url: locationUrl,
+//         dataType: "jsonp",
+//         cache: true, // Use cache for better reponse times
+//         jsonpCallback: "awxCallback", // Prevent unique callback name for better reponse times
+//         success: function(data) {
+//             console.log(data);
+//         },
+//         error: function(XMLHttpRequest, textStatus, errorThrown) {
+//             console.log("error!");
+//             alert("Status: " + textStatus);
+//             alert("Error: " + errorThrown);
+//         }
+//     });
+// }

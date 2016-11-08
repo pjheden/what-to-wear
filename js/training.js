@@ -18,7 +18,7 @@ function kNearestNeighbours(temperature){
   var closest_key = 999;
   var keys = getAllKeys();
   for (var i = 0; i < keys.length; i++) {
-    if(abs(temperature-keys[i]) < abs(closest_key)){
+    if(Math.abs(temperature-keys[i]) < Math.abs(closest_key)){
       closest_key = keys[i];
     }
   }
@@ -30,11 +30,13 @@ function toggleTraining() {
     if (visible) {
         $('.trainingContainer').hide();
         $('#saveBtn').hide();
+        $('#plusBtn').hide();
         $('#trainBtn')[0].innerHTML = "Show";
         visible = false;
     } else {
         $('.trainingContainer').show();
         $('#saveBtn').show();
+        $('#plusBtn').show();
         $('#trainBtn')[0].innerHTML = "Hide";
         visible = true;
     }
@@ -78,6 +80,16 @@ function buttonConfirmationAnimation() {
     }, 3000);
 }
 
+//Add a form
+function addForm(){
+  generateForm($('.trainingContainer').length, undefined, undefined, false);
+}
+
+// Delete data, and remove form
+function removeForm(buttonId){
+  removeData( $('#'+buttonId+'trainingForm input').val() );
+  $('#'+buttonId+'trainingForm').remove();
+}
 //Generate html form
 function generateForm(day, celcius = undefined, clothing = undefined, hidden = true) {
     /* ----------Pattern------------
@@ -96,8 +108,10 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
         </form>
     </div>
     */
-    var html = '<div class="trainingContainer" ' + ((hidden) ? "hidden" : "") + '>';
-    html += '<p>Day ' + day + '</p>';
+    var html = '<div class="trainingContainer" id="'+day+'trainingForm" ' + ((hidden) ? "hidden" : "") + '>';
+    html += '<p>Day ' + day;
+    html += '<button onclick="removeForm('+day+')" class="btn btn-primary" id=' + day +'training_from_btn" style="float:right;">-</button>';
+    html += '</p>';
     html += '<form>Temperature(Celsius):<br>'
     html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '"><br>';
     html += 'Clothes:<br>';
