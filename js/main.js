@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
     setup();
     api_ai();
 
-    getWeather();//TEST
+    getWeather(); //TEST
 });
 
 
@@ -49,16 +49,21 @@ function triggerAction(action) {
 }
 
 function weather_action() {
-    var weather = getRandomWeather();
-    var cels = Math.round(parseFloat(weather) * 100) / 100;
-    suggestClothes(cels);
+    var weatherPromise = getWeather();
+    weatherPromise.then(function(weather) {
+            var cels = Math.round(parseFloat(weather.feel) * 100) / 100;
+            suggestClothes(cels);
+        },
+        function(error) {
+            console.error(error);
+        });
 }
 
 //Give cloth  suggestion based on temperature
 function suggestClothes(temp) {
     var clothing;
     clothing = getCloth(parseInt(kNearestNeighbours(temp)));
-    var response = 'It is ' + temp + ' degrees outside, you should wear ' + clothing;
+    var response = 'It feels like ' + temp + ' degrees in '+getCity()+', '+getCountry()+', you should wear ' + clothing;
     voiceResponse(response);
     $('#wear').text(response);
 }

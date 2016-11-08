@@ -1,15 +1,29 @@
 var apiKey = '60be2003867989ab';
 var baseUrl = 'http://api.wunderground.com/api/';
+var country = 'Sweden';
+var city = 'Stockholm';
 
+//Returns a promise to give the weather
 function getWeather() {
-    console.log('Weather test');
-    var weatherPromise = fetchWeather();
-    weatherPromise.then(function(weather) {
-        console.log(weather.real);
-        console.log(weather.feel);
-    }, function(error) {
-        console.error('Error, could not fetch the weather', error);
-    });
+    var promise = new Promise(
+        function(resolve, reject) {
+            var weatherPromise = fetchWeather();
+
+            weatherPromise.then(function(weather) {
+                resolve(weather);
+            }, function(error) {
+                reject(error);
+            });
+        });
+    return promise;
+}
+
+function getCountry(){
+  return country;
+}
+
+function getCity(){
+  return city;
 }
 
 //Returns random weather
@@ -26,20 +40,20 @@ function fetchWeather() {
     var promise = new Promise(
         function(resolve, reject) {
             $.ajax({
-                url: baseUrl + apiKey + "/geolookup/conditions/q/IA/Cedar_Rapids.json",
+                url: baseUrl + apiKey + "/geolookup/conditions/q/"+country +'/'+ city +".json",
                 dataType: "jsonp",
                 success: function(parsed_json) {
-                    console.log(parsed_json);
+                  console.log(parsed_json);
                     var temp = {
-                      real: undefined,
-                      feel: undefined
+                        real: undefined,
+                        feel: undefined
                     };
                     temp.real = parsed_json['current_observation']['temp_c'];
                     temp.feel = parsed_json['current_observation']['feelslike_c'];
                     resolve(temp);
                 },
                 error: function() {
-                  reject('Error, weather request timed out');
+                    reject('Error, weather request timed out');
                 }
             });
         }
