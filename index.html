@@ -43,22 +43,10 @@
 
     <!-- Training section -->
     <div class="container containerT" id="trainingC">
-        <h3>Training <button onclick="" class="btn btn-primary" id="saveBtn">Save</button></h3>
-        <!--    TEMPLATE -->
-        <div class="trainingContainer">
-            <p>Day 1</p>
-            <form>
-                Temperature(Celsius):<br>
-                <input type="text" name="temperature"><br> Clothes:
-                <br>
-                <select id="mySel">
-                  <option value="1">T-shirt</option>
-                  <option value="2">Sweater</option>
-                  <option value="3">T-shirt and a Jacket</option>
-                  <option value="4">Sweater and a Jacket</option>
-                </select>
-            </form>
-        </div>
+        <h3>Training
+          <button onclick="toggleTraining()" class="btn btn-primary" id="trainBtn">Show</button>
+          <button onclick="saveForms()" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
+        </h3>
     </div>
 
     <!-- Debug section -->

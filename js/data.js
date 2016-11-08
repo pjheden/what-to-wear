@@ -24,3 +24,19 @@ function getData(key) {
 function removeData(key) {
     if (storageSupport) localStorage.removeItem(key);
 }
+
+function getAllKeys(){
+  var keys = [];
+  for (var i = 0, len = localStorage.length; i < len; ++i) {
+      keys.push( localStorage.key(i) );
+  }
+  return keys;
+}
+
+function getAllData(){
+  var data = [];
+  for (var i = 0, len = localStorage.length; i < len; ++i) {
+      data.push( localStorage.getItem(localStorage.key(i)) );
+  }
+  return data;
+}
