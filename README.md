@@ -10,14 +10,14 @@ Using API.AI for Natrual Language processing: https://api.ai/
 
 HTML5 webkitSpeechRecognition for STT: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
 
-AccurateWeather's API for weather: http://apidev.accuweather.com/developers/
+Weather Underground API for weather: https://www.wunderground.com/weather/api/
 
 CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 
 ## Future work
-1. Implement AccuWeather for real weather, preferably their "feels like temperature"
 
 ### To do, priority
+1. Implement AccuWeather for real weather, preferably their "feels like" temperature
 
 ### To do
 0. Add special warnings for downfall, i.e. snow/rain/hail
@@ -27,4 +27,4 @@ CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 4. Add weather visuals
 5. Make mobile friendly
 6. Remove AI & input and just show what to wear (boring)
-7. Make save button yellow upon any changes
+7. Make save button yellow upon any changes to suggest unsaved changes
