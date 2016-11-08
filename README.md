@@ -27,6 +27,7 @@ CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 ## Future work
 
 ### To do, priority
+1. Bugfix : k-nearest-neighbours isnt functional
 
 ### To do
 0. Add special warnings for downfall, i.e. snow/rain/hail

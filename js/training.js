@@ -69,6 +69,8 @@ function saveForms() {
     })
 
     for (var i = 0; i < temps.length; i++) {
+      console.log('trying to save', temps[i]);
+      console.log('numeric?', is_numeric(temps[i]));
         if (temps[i] && clothings[i] && is_numeric(temps[i]))
             saveData(temps[i], clothings[i]);
     }
@@ -76,7 +78,7 @@ function saveForms() {
 
 //Checks that a string holds numeric values
 function is_numeric(str) {
-    return /^\d+$/.test(str);
+    return /^-?\d*\.{0,1}\d+$/.test(str);
 }
 
 function buttonConfirmationAnimation(buttonId) {
@@ -120,9 +122,9 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     html += '<button onclick="editForm(' + day + ')" class="btn btn-info" style="float:right;">Edit</button>';
     html += '</p>';
     html += '<form>Temperature(Celsius):<br>'
-    html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '" disabled><br>';
+    html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '" ' + ((hidden) ? "disabled" : "") + '><br>';
     html += 'Clothes:<br>';
-    html += '<select disabled>';
+    html += '<select ' + ((hidden) ? "disabled" : "") + '>';
     html += '<option value="1" ' + ((clothing == 1) ? "selected=selected" : "") + '>T-shirt</option>';
     html += '<option value="2" ' + ((clothing == 2) ? "selected=selected" : "") + '>Sweater</option>';
     html += '<option value="3" ' + ((clothing == 3) ? "selected=selected" : "") + '>T-shirt and a Jacket</option>';
