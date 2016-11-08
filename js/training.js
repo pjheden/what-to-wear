@@ -7,6 +7,13 @@ jQuery(document).ready(function($) {
         }
     } else {
         //no existant data, TODO create stock data
+        var start_temp = -5;
+        var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
+        for (var i = 0; i < getNumbersClothes(); i++) {
+            generateForm(i, start_temp, getNumbersClothes()-i);
+            saveData(start_temp,  getNumbersClothes()-i);
+            start_temp += increment;
+        }
     }
 });
 
@@ -14,18 +21,19 @@ jQuery(document).ready(function($) {
   Makes a educated guess on clothing
   using k-nearest neighbours algorithm
 */
-function kNearestNeighbours(temperature){
-  var closest_key = 999;
-  var keys = getAllKeys();
-  for (var i = 0; i < keys.length; i++) {
-    if(Math.abs(temperature-keys[i]) < Math.abs(closest_key)){
-      closest_key = keys[i];
+function kNearestNeighbours(temperature) {
+    var closest_key = 999;
+    var keys = getAllKeys();
+    for (var i = 0; i < keys.length; i++) {
+        if (Math.abs(temperature - keys[i]) < Math.abs(closest_key)) {
+            closest_key = keys[i];
+        }
     }
-  }
-  return getData(closest_key);
+    return getData(closest_key);
 }
 
 var visible = false;
+
 function toggleTraining() {
     if (visible) {
         $('.trainingContainer').hide();
@@ -49,7 +57,7 @@ function toggleTraining() {
   Display success
 */
 function saveForms() {
-    buttonConfirmationAnimation();
+    buttonConfirmationAnimation('saveBtn');
 
     var temps = [];
     var clothings = [];
@@ -61,18 +69,18 @@ function saveForms() {
     })
 
     for (var i = 0; i < temps.length; i++) {
-      if(temps[i] && clothings[i] && is_numeric(temps[i]))
-        saveData(temps[i], clothings[i]);
+        if (temps[i] && clothings[i] && is_numeric(temps[i]))
+            saveData(temps[i], clothings[i]);
     }
 }
 
 //Checks that a string holds numeric values
-function is_numeric(str){
+function is_numeric(str) {
     return /^\d+$/.test(str);
 }
 
-function buttonConfirmationAnimation() {
-    var button = $('#saveBtn');
+function buttonConfirmationAnimation(buttonId) {
+    var button = $('#' + buttonId);
     var bgcolor = button.css('background-color');
     var bcolor = button.css('border-color');
     button[0].innerHTML = 'Saved!';
@@ -87,45 +95,29 @@ function buttonConfirmationAnimation() {
 }
 
 //Add a form
-function addForm(){
-  generateForm($('.trainingContainer').length, undefined, undefined, false);
+function addForm() {
+    generateForm($('.trainingContainer').length, undefined, undefined, false);
 }
 
 //Remove the data, then allow the form to be edited
-function editForm(buttonId){
-  removeData( $('#'+buttonId+'trainingForm input').val() );
+function editForm(buttonId) {
+    removeData($('#' + buttonId + 'trainingForm input').val());
 
-  $('#'+buttonId+'trainingForm input').prop('disabled', false);
-  $('#'+buttonId+'trainingForm select').prop('disabled', false);
+    $('#' + buttonId + 'trainingForm input').prop('disabled', false);
+    $('#' + buttonId + 'trainingForm select').prop('disabled', false);
 }
 
 // Delete data, and remove form
-function removeForm(buttonId){
-  removeData( $('#'+buttonId+'trainingForm input').val() );
-  $('#'+buttonId+'trainingForm').remove();
+function removeForm(buttonId) {
+    removeData($('#' + buttonId + 'trainingForm input').val());
+    $('#' + buttonId + 'trainingForm').remove();
 }
 //Generate html form
 function generateForm(day, celcius = undefined, clothing = undefined, hidden = true) {
-    /* ----------Pattern------------
-    <div class="trainingContainer">
-        <p>Day 1</p>
-        <form>
-            Temperature(Celsius):<br>
-            <input type="text" name="temperature"><br> Clothes:
-            <br>
-            <select>
-              <option value="1">T-shirt</option>
-              <option value="2">Sweater</option>
-              <option value="3">T-shirt and a Jacket</option>
-              <option value="4">Sweater and a Jacket</option>
-            </select>
-        </form>
-    </div>
-    */
-    var html = '<div class="trainingContainer" id="'+day+'trainingForm" ' + ((hidden) ? "hidden" : "") + '>';
+    var html = '<div class="trainingContainer" id="' + day + 'trainingForm" ' + ((hidden) ? "hidden" : "") + '>';
     html += '<p>Day ' + day;
-    html += '<button onclick="removeForm('+day+')" class="btn btn-danger" style="float:right;">-</button>';
-    html += '<button onclick="editForm('+day+')" class="btn btn-info" style="float:right;">Edit</button>';
+    html += '<button onclick="removeForm(' + day + ')" class="btn btn-danger" style="float:right;">-</button>';
+    html += '<button onclick="editForm(' + day + ')" class="btn btn-info" style="float:right;">Edit</button>';
     html += '</p>';
     html += '<form>Temperature(Celsius):<br>'
     html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '" disabled><br>';

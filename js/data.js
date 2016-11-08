@@ -41,22 +41,27 @@ function getAllData() {
     return data;
 }
 
+//NOTE clothes are hardcoded for the moment
 function getCloth(data) {
     switch (data) {
-        case '1':
+        case 1:
             return 'a T-Shirt';
             break;
-        case '2':
+        case 2:
             return 'a Sweater';
             break;
-        case '3':
+        case 3:
             return 'a T-Shirt and a Jacket';
             break;
-        case '4':
+        case 4:
             return 'a Sweater and a Jacket';
             break;
         default:
             return 'undefined';
 
     }
+}
+
+function getNumbersClothes(){
+  return 4;
 }

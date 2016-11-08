@@ -60,7 +60,7 @@ function weather_action() {
 //Give cloth  suggestion based on temperature
 function suggestClothes(temp) {
     var clothing;
-    clothing = getCloth( kNearestNeighbours(temp) );
+    clothing = getCloth( parseInt(kNearestNeighbours(temp)) );
     var response = 'It is ' + temp + ' degrees outside, you should wear ' + clothing;
     voiceResponse(response);
     $('#wear').text(response);
@@ -91,7 +91,7 @@ function suggestClothes2(temp) {
 
 //Returns random weather
 function getRandomWeather() {
-    return getRandomArbitrary(-20, 30);
+    return getRandomArbitrary(-5, 25);
 }
 
 //Returns random number from min, max
