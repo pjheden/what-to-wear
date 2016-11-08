@@ -10,16 +10,13 @@ Using API.AI for Natrual Language processing: https://api.ai/
 
 HTML5 webkitSpeechRecognition for STT: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
 
-Weather Underground https://www.wunderground.com/?apiref=c9efedbf428785a3
-API for weather:
-https://www.wunderground.com/weather/api/
+Weather Underground for weather: https://www.wunderground.com/?apiref=c9efedbf428785a3
 
 CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 
 ## Future work
 
 ### To do, priority
-1. Implement AccuWeather for real weather, preferably their "feels like" temperature
 
 ### To do
 0. Add special warnings for downfall, i.e. snow/rain/hail
