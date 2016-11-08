@@ -17,10 +17,12 @@ AccurateWeather's API for weather http://apidev.accuweather.com/developers/
 
 ### To do, priority
 1. Styling : Make it cards, fill the boxes and give them shadow. Inspiration: angularMaterial
-2. Bugfix : If you edit a form, it will add a new one and not delete the old one
+2. Make save button yellow upon any changes
 
 ### To do
 1. Cancel mic recording by clicking the button again
 2. Allow for custom names clothes, potentially add own levels
 3. Sort training data by temperature
 4. Add weather visuals
+5. Make mobile friendly
+6. Remove input and just show what to wear

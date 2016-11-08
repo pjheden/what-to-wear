@@ -91,6 +91,14 @@ function addForm(){
   generateForm($('.trainingContainer').length, undefined, undefined, false);
 }
 
+//Remove the data, then allow the form to be edited
+function editForm(buttonId){
+  removeData( $('#'+buttonId+'trainingForm input').val() );
+
+  $('#'+buttonId+'trainingForm input').prop('disabled', false);
+  $('#'+buttonId+'trainingForm select').prop('disabled', false);
+}
+
 // Delete data, and remove form
 function removeForm(buttonId){
   removeData( $('#'+buttonId+'trainingForm input').val() );
@@ -116,12 +124,13 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     */
     var html = '<div class="trainingContainer" id="'+day+'trainingForm" ' + ((hidden) ? "hidden" : "") + '>';
     html += '<p>Day ' + day;
-    html += '<button onclick="removeForm('+day+')" class="btn btn-primary" id=' + day +'training_from_btn" style="float:right;">-</button>';
+    html += '<button onclick="removeForm('+day+')" class="btn btn-primary" style="float:right;">-</button>';
+    html += '<button onclick="editForm('+day+')" class="btn btn-info" style="float:right;">Edit</button>';
     html += '</p>';
     html += '<form>Temperature(Celsius):<br>'
-    html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '"><br>';
+    html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '" disabled><br>';
     html += 'Clothes:<br>';
-    html += '<select>';
+    html += '<select disabled>';
     html += '<option value="1" ' + ((clothing == 1) ? "selected=selected" : "") + '>T-shirt</option>';
     html += '<option value="2" ' + ((clothing == 2) ? "selected=selected" : "") + '>Sweater</option>';
     html += '<option value="3" ' + ((clothing == 3) ? "selected=selected" : "") + '>T-shirt and a Jacket</option>';
