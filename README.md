@@ -1,7 +1,4 @@
-
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
+# What-To-Wear
 HTML5 webApp that eventually will suggest clothing to wear depending on the weather outside.
 The thought is that the app will require training, since each user is different.
 Thus, you will input what you wore and if you were cold/warm for a few days and then the program can make suggestions.
@@ -16,7 +13,3 @@ AccurateWeather's API for weather http://apidev.accuweather.com/developers/
 ## Future work
 1. Implement ML-technique for temperature and clothing correlation
 2. Implement AccuWeather for weather
-
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
