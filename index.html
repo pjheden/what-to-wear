@@ -9,60 +9,51 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> <!--Cards layout -->
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <!--Cards layout -->
     <script type="text/javascript" src="./js/keys.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/data.js"></script>
     <script type="text/javascript" src="./js/training.js"></script>
-    <script type="text/javascript" src="./js/api_ai.js"></script>
     <script type="text/javascript" src="./js/webkitspeech.js"></script>
     <script type="text/javascript" src="./js/weather.js"></script>
 </head>
 
 <body>
-  <div class="container w3-panel w3-card-12" style="width:20%;">
-      <h1> What-to-wear  </h1>
-  </div>
-
-    <!-- <div>
-    <p> Weather </p>
-    <p id="celcius"></p>
-    <p> *C </p>
-  </div> -->
-
-    <!-- Input section -->
-    <div class="container w3-panel w3-card-8">
-        <h3>Input</h3>
-        <input id="input" type="text">
-        <button class="btn btn-info" id="mic" onclick='startRecognition()'>Mic</button>
-        <button onclick="api_ai()" class="btn btn-primary">Send</button>
-        <div class="checkbox">
-            <label><input type="checkbox" value="isSpeech" id="speech">Speech on/off</label>
-        </div>
+    <div class="container w3-panel w3-card-12" style="width:30%;">
+        <h1> What-to-wear  </h1>
     </div>
 
     <!-- Response section -->
-    <div class="container w3-panel w3-card-8">
-        <h3>Output</h3>
-        <p id="wear"></p>
-        <p id="response"></p>
-        <p id="action"></p>
+    <div class="container w3-panel w3-card-8" style="width:30%;">
+        <div class="w3-card-2" style="width:100%">
+            <img src="images/tshirt.png" alt="tshirt" style="width:100%;">
+        </div>
+        <div class="w3-container w3-center">
+            <p id="wear"></p>
+        </div>
     </div>
 
-    <!-- Training section -->
-    <div class="container containerT w3-panel w3-card-8" id="trainingC">
-        <h3>Training
-          <button onclick="toggleTraining()" class="btn btn-primary" id="trainBtn">Show</button>
-          <button onclick="saveForms()" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
-          <button onclick="addForm()" class="btn btn-primary" id="plusBtn" style="display:none;">+</button>
-        </h3>
+    <!-- Input section -->
+    <div class="container w3-panel w3-card-8" style="width:30%;">
+        <div class="w3-card-2" style="width:100%">
+            <img src="images/weather-icons/snow1.png" alt="snow" style="width:100%;">
+            <div class="w3-container w3-center">
+                <p>Snow, 7*C, Feels like 5*C, Stockholm Sweden.</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Debug section -->
-    <div class="container w3-panel w3-card-8">
-        <h3> JSON DEBUG <button onclick="toggleJSONDebug()" class="btn btn-primary" id="jsonBtn">Show</button></h3>
-        <p id="json"></p>
-    </div>
+
+
+    <!-- Training section-->
+        <div class="w3-card-2" id="trainingC">
+          <h3>Training
+            <button onclick="toggleTraining()" class="btn btn-primary" id="trainBtn">Show</button>
+            <button onclick="saveForms()" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
+            <button onclick="addForm()" class="btn btn-primary" id="plusBtn" style="display:none;">+</button>
+          </h3>
+        </div>
 
 </body>
 

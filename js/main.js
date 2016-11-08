@@ -1,50 +1,12 @@
 jQuery(document).ready(function($) {
-    var text = "What should I wear?"; //default query
-    $("#input").val(text);
-
-    setup();
-    api_ai();
-
+    weather_action();
 });
 
-
-//Setup function
-function setup() {
-    $('#json').hide();
-    //Make input field dynamic
-    $('input[type="text"]')
-        .keyup(resizeInput) // event handler
-        .each(resizeInput); // resize on page load
-
-    //keylistener (enter)
-    $('#input').keypress(function(e) {
-        if (e.which == 13) {
-            api_ai();
-        }
-    });
-}
-
-//Dynamic input field
-function resizeInput() {
-    $(this).attr('size', $(this).val().length);
-}
-
-//Call function depending on action
-function triggerAction(action) {
-    switch (action) {
-        case "weather-action":
-            weather_action();
-            break;
-        case "user-information":
-            //TODO add username and age
-            break;
-        case "temperature-training":
-            //TODO add support for voice training
-            break;
-        default:
-            console.log('unsuported action', action);
-            break;
-    }
+function isMobileUser(){
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    return true;
+  }
+  return false;
 }
 
 function weather_action() {
@@ -63,25 +25,10 @@ function suggestClothes(temp) {
     var clothing;
     clothing = getCloth(parseInt(kNearestNeighbours(temp)));
     var response = 'It feels like ' + temp + ' degrees in '+getCity()+', '+getCountry()+', you should wear ' + clothing;
-    voiceResponse(response);
-    $('#wear').text(response);
+    setResponse(response);
 }
 
 //Updates the response p element
 function setResponse(val) {
-    $("#response").text(val);
-}
-
-var visible = false;
-
-function toggleJSONDebug() {
-    if (visible) {
-        $('#json').hide();
-        $('#jsonBtn')[0].innerHTML = "Show";
-        visible = false;
-    } else {
-        $('#json').show();
-        $('#jsonBtn')[0].innerHTML = "Hide";
-        visible = true;
-    }
+    $("#wear").text(val);
 }
