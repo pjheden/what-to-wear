@@ -9,6 +9,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> <!--Cards layout -->
     <script type="text/javascript" src="./js/script.js"></script>
     <script type="text/javascript" src="./js/data.js"></script>
     <script type="text/javascript" src="./js/training.js"></script>
@@ -24,7 +25,7 @@
   </div> -->
 
     <!-- Input section -->
-    <div class="container">
+    <div class="container w3-panel w3-card-8">
         <h3>Input</h3>
         <input id="input" type="text">
         <button class="btn btn-info" id="mic" onclick='startRecognition()'>Mic</button>
@@ -35,7 +36,7 @@
     </div>
 
     <!-- Response section -->
-    <div class="container">
+    <div class="container w3-panel w3-card-8">
         <h3>Output</h3>
         <p id="wear"></p>
         <p id="response"></p>
@@ -43,7 +44,7 @@
     </div>
 
     <!-- Training section -->
-    <div class="container containerT" id="trainingC">
+    <div class="container containerT w3-panel w3-card-8" id="trainingC">
         <h3>Training
           <button onclick="toggleTraining()" class="btn btn-primary" id="trainBtn">Show</button>
           <button onclick="saveForms()" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
@@ -52,7 +53,7 @@
     </div>
 
     <!-- Debug section -->
-    <div class="container">
+    <div class="container w3-panel w3-card-8">
         <h3> JSON DEBUG <button onclick="toggleJSONDebug()" class="btn btn-primary" id="jsonBtn">Show</button></h3>
         <p id="json"></p>
     </div>

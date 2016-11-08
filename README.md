@@ -16,7 +16,6 @@ AccurateWeather's API for weather http://apidev.accuweather.com/developers/
 1. Implement AccuWeather for real weather, preferably their "feels like temperature"
 
 ### To do, priority
-1. Styling : Make it cards, fill the boxes and give them shadow. Inspiration: angularMaterial
 2. Make save button yellow upon any changes
 
 ### To do

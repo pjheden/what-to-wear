@@ -124,7 +124,7 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     */
     var html = '<div class="trainingContainer" id="'+day+'trainingForm" ' + ((hidden) ? "hidden" : "") + '>';
     html += '<p>Day ' + day;
-    html += '<button onclick="removeForm('+day+')" class="btn btn-primary" style="float:right;">-</button>';
+    html += '<button onclick="removeForm('+day+')" class="btn btn-danger" style="float:right;">-</button>';
     html += '<button onclick="editForm('+day+')" class="btn btn-info" style="float:right;">Edit</button>';
     html += '</p>';
     html += '<form>Temperature(Celsius):<br>'
