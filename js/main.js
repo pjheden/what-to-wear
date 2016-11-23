@@ -48,10 +48,10 @@ function setClothImg(imgPath, imgDesc) {
 
 function setMobileStyling() {
   /*
-  
+
 
   */
-  // $('.container').css('width','100%');
+  $('.container').css('width','100%');
   // $('h1, h2, h3, h4').css('font-size', '5vmax');
   // $('p').css('font-size', '1.5vmax');
   // $('button').css('width', '5vmax');

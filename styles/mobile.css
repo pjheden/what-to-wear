@@ -17,3 +17,7 @@ input, select {
   width: 20vmax;
   height: 5vmax;
 }
+
+.container {
+  width: 100%;
+}
