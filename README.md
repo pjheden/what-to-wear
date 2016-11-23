@@ -19,9 +19,7 @@ CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 
 ## Future work
 
-2. Allow for custom names clothes, potentially add levels
-0. Add special warnings for downfall, i.e. snow/rain/hail
+1. Allow for custom names clothes, potentially add levels
+2. Add special warnings for downfall, i.e. snow/rain/hail
 
-6. add equal padding
-7. Make save button yellow upon any changes to suggest unsaved changes
-4. Add weather visuals (?)
+3. Make save button yellow upon any changes to suggest unsaved changes
