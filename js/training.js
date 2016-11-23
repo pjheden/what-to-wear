@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
     var keys = getAllKeys();
+    keys.sort(sortInts);
     console.log(keys);
     //Load all saved data
     if (keys.length != 0) {
@@ -17,6 +18,11 @@ jQuery(document).ready(function($) {
         }
     }
 });
+
+//Sort array of string ints
+function sortInts(a,b) {
+    return parseInt(a) - parseInt(b);
+}
 
 /*
   Makes a educated guess on clothing
@@ -126,10 +132,9 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '" ' + ((hidden) ? "disabled" : "") + '><br>';
     html += 'Clothes:<br>';
     html += '<select ' + ((hidden) ? "disabled" : "") + '>';
-    html += '<option value="1" ' + ((clothing == 1) ? "selected=selected" : "") + '>T-shirt</option>';
-    html += '<option value="2" ' + ((clothing == 2) ? "selected=selected" : "") + '>Sweater</option>';
-    html += '<option value="3" ' + ((clothing == 3) ? "selected=selected" : "") + '>T-shirt and a Jacket</option>';
-    html += '<option value="4" ' + ((clothing == 4) ? "selected=selected" : "") + '>Sweater and a Jacket</option>';
+    for (var i = 1; i < getNumbersClothes()+1; i++) {
+      html += '<option value="' + i + '" ' + ((clothing == i) ? "selected=selected" : "") + '>' + getCloth(i) + '</option>';
+    }
     html += '</select></form></div>';
 
     $('.containerT').append(html);

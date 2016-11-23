@@ -1,0 +1,19 @@
+h1, h2, h3, h4 {
+    color: blue;
+    font-size: 5vmax;
+}
+
+p {
+  font-size: 1.5vmax;
+}
+
+button {
+  width: 5vmax;
+  height: 5vmax;
+}
+
+input, select {
+  font-size: 1.5vmax;
+  width: 20vmax;
+  height: 5vmax;
+}

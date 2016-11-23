@@ -51,10 +51,10 @@ function getCloth(data) {
             return 'a Sweater';
             break;
         case 3:
-            return 'a T-Shirt and a Jacket';
+            return 'a thick Sweater';
             break;
         case 4:
-            return 'a Sweater and a Jacket';
+            return 'a warm Jacket';
             break;
         default:
             return 'undefined';
@@ -62,6 +62,37 @@ function getCloth(data) {
     }
 }
 
+function getClothesImg(cloth){
+  switch (cloth) {
+      case 1:
+          // return 'a T-Shirt';
+          return './images/tshirt.svg';
+          break;
+      case 2:
+          // return 'a Sweater';
+          return './images/sweater.svg';
+          break;
+      case 3:
+          // return 'a Thick Sweater';
+          return './images/thick_sweater.svg';
+          break;
+      case 4:
+          // return 'a warm Jacket';
+          return './images/coat.svg';
+          break;
+      default:
+          return './images/woman_bikini.svg';//only for fun
+          // return 'undefined';
+
+  }
+}
+
+//TODO
+function getWeatherImg(){
+
+}
+
+//TODO make dynamic
 function getNumbersClothes(){
   return 4;
 }

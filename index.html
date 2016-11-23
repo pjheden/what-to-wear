@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <!--
     For more information visit: http://api.accuweather.com/developers/
     -->
@@ -8,8 +7,9 @@
 <head>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
     <!--Cards layout -->
     <script type="text/javascript" src="./js/keys.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
@@ -26,33 +26,48 @@
     <!-- Response section -->
     <div class="container w3-panel w3-card-8" style="width:30%;">
         <div style="width:100%; height:25em;">
-            <img src="images/tshirt.png" alt="tshirt" style="width:100%; height:100%;">
+            <img id="clothImg" src="" alt="" style="width:100%; height:100%;">
         </div>
         <div class="w3-container w3-center">
             <p id="wear"></p>
         </div>
     </div>
 
-    <!-- Input section -->
+    <!-- Input section
+    REMOVE THIS?
     <div class="container w3-panel w3-card-8" style="width:30%;">
             <img src="images/weather-icons/snow1.png" alt="snow" style="width:100%;">
             <div class="w3-container w3-center">
                 <p>Snow, 7*C, Feels like 5*C, Stockholm Sweden.</p>
             </div>
     </div>
-
-
+    -->
 
     <!-- Training section-->
     <div class="container containerT w3-panel w3-card-8" style="width:30%;">
         <div style="width:100%" id="trainingC">
-          <h3>Training
+            <h3>Training
             <button onclick="toggleTraining()" class="btn btn-primary" id="trainBtn">Show</button>
             <button onclick="saveForms()" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
             <button onclick="addForm()" class="btn btn-primary" id="plusBtn" style="display:none;">+</button>
           </h3>
         </div>
     </div>
+
+    <!-- TODO -->
+    <!-- Clothes edit section -->
+    <!-- <div class="container w3-panel w3-card-8" style="width:30%;">
+        <div style="width:100%" id="clothesC">
+          <h3>Edit Clothes
+            <button onclick="toggleClothes()" class="btn btn-primary" id="clothesBtn">Show</button>
+          </h3>
+        </div>
+    </div> -->
+
+    <!-- About section -->
+    <p class="about">Made by Julian Hedén, julianheden@gmail.com</p>
+    <p class="about">Icons designed by Freepik from Flaticon</p>
+
 
 </body>
 

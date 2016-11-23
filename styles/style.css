@@ -25,11 +25,15 @@ h1 {
 .trainingContainer {
     float: left;
     padding: 1em;
+    width: 100%;
 }
 
 select {
     padding: 4px;
-    font-size: 16px;
     line-height: 1;
     border-radius: 0;
+}
+
+.about {
+  text-align: center;
 }
