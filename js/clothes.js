@@ -1,11 +1,3 @@
-//TODO
-/*
-  1. Display all curent clothes, and allow edit of name and image.
-  2. Allow for adding new clothes
-    1. New name
-    2. upload image or use existing image
-*/
-
 var data;
 jQuery(document).ready(function($) {
 
@@ -63,49 +55,3 @@ function getClothesImg(cloth) {
       return data[i].imgPath;
   }
 }
-
-// //NOTE clothes are hardcoded for the moment
-// function getCloth(data) {
-//     switch (data) {
-//         case 1:
-//             return 'a T-Shirt';
-//             break;
-//         case 2:
-//             return 'a Sweater';
-//             break;
-//         case 3:
-//             return 'a thick Sweater';
-//             break;
-//         case 4:
-//             return 'a warm Jacket';
-//             break;
-//         default:
-//             return 'undefined';
-//
-//     }
-// }
-//
-// function getClothesImg(cloth){
-//   switch (cloth) {
-//       case 1:
-//           // return 'a T-Shirt';
-//           return './images/tshirt.svg';
-//           break;
-//       case 2:
-//           // return 'a Sweater';
-//           return './images/sweater.svg';
-//           break;
-//       case 3:
-//           // return 'a Thick Sweater';
-//           return './images/thick_sweater.svg';
-//           break;
-//       case 4:
-//           // return 'a warm Jacket';
-//           return './images/coat.svg';
-//           break;
-//       default:
-//           return './images/woman_bikini.svg';//only for fun
-//           // return 'undefined';
-//
-//   }
-// }

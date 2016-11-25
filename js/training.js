@@ -1,7 +1,6 @@
 jQuery(document).ready(function($) {
 
     var data = getObject("training");
-    console.log('trainingObject', data);
     if(data){
       //generateForms
       for (var i = 0; i < data.length; i++) {
@@ -11,24 +10,6 @@ jQuery(document).ready(function($) {
       //create stock data
       createDefaultData();
     }
-    // var keys = getAllKeys();
-    // keys.sort(sortInts);
-    // console.log(keys);
-    //Load all saved data
-    // if (keys.length != 0) {
-    //     for (var i = 0; i < keys.length; i++) {
-    //         generateForm(i, keys[i], getData(keys[i]));
-    //     }
-    // } else {
-    //     //no existant data, TODO create stock data
-    //     var start_temp = -5;
-    //     var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
-    //     for (var i = 0; i < getNumbersClothes(); i++) {
-    //         generateForm(i, start_temp, getNumbersClothes()-i);
-    //         saveData(start_temp,  getNumbersClothes()-i);
-    //         start_temp += increment;
-    //     }
-    // }
 });
 
 function createDefaultData(){
@@ -78,14 +59,17 @@ function toggleTraining() {
         $('.trainingContainer').hide();
         $('#saveBtn').hide();
         $('#plusBtn').hide();
+        $('#clothBtn').hide();
         $('#trainBtn')[0].innerHTML = "Show";
         visible = false;
     } else {
         $('.trainingContainer').show();
         $('#saveBtn').show();
         $('#plusBtn').show();
+        $('#clothBtn').show();
         $('#trainBtn')[0].innerHTML = "Hide";
         visible = true;
+        removeClothForms();
     }
 
 }
@@ -179,4 +163,67 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     html += '</select></form></div>';
 
     $('.containerT').append(html);
+}
+
+//Add clothing
+function addCloth(){
+  toggleTraining();
+  var data = getObject("clothes");
+  for (var i = 0; i < data.length; i++) {
+    generateClothingForm(data[i]);
+  }
+  generateClothingAddForm();
+}
+
+function removeClothForms(){
+  $('.clothDiv').remove();
+}
+
+function generateClothingForm(clothObj){
+  var html = '<div class="clothDiv" style="width:8em; height:10em; float:left; text-align:center;">';
+  html +='<img src="'+clothObj.imgPath+'" alt="'+clothObj.name+'" style="width:100%; height:60%;">';
+  html +='<p style="width:100%; height:20%; padding:10%;">'+clothObj.name+'</p>';
+  html += '</div>';
+
+  $('.containerT').append(html);
+}
+
+function generateClothingAddForm(){
+  var html;
+  var html = '<div class="clothDiv" style="width:8em; height:10em; float:left; text-align:center;">';
+  html += '<input type="text" value="" name="cloth" placeholder="Scarf and a Jacket">';
+  html += '<input type="text" value="" name="path" placeholder="C:/images/scarf_and_jacket.svg">';
+  html += '<button onclick="saveNewClothing()" class="btn btn-info" style="float:center;">Add</button>';
+  html += '</div>';
+
+  $('.containerT').append(html);
+}
+
+//Save the clothing to db, add it to the list and clear input
+function saveNewClothing(){
+  var clothObj = {
+    'value': undefined,
+    'name': undefined,
+    'imgPath': undefined
+  };
+
+  $('.clothDiv input[name="cloth"').each(function() {
+    clothObj.name = this.value;
+  });
+  $('.clothDiv input[name="path"').each(function() {
+    clothObj.imgPath = this.value;
+  });
+
+  if(clothObj.name && clothObj.imgPath){
+    //Add it to previous data and save it
+    var data = getObject("clothes");
+    console.log('new obj value', data.length +1 );
+    clothObj.value = data.length + 1;
+    data.push(clothObj);
+    saveObject("clothes", data);
+  }
+
+  //Redraw the clothing
+  removeClothForms();
+  toggleTraining();
 }
