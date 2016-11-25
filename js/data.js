@@ -53,8 +53,3 @@ function getAllData() {
 function getWeatherImg(){
 
 }
-
-//TODO make dynamic
-function getNumbersClothes(){
-  return 4;
-}
