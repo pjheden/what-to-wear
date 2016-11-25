@@ -4,9 +4,10 @@ var country = 'Sweden';
 var city = 'Stockholm';
 
 
+//Get user location
 var onSuccess = function(location){
   country = location.country.names.en;
-  city = location.city.names.en; 
+  city = location.city.names.en;
 };
 
 var onError = function(error){
@@ -18,6 +19,7 @@ var onError = function(error){
 
 // geoip2.country(onSuccess, onError);
 geoip2.city(onSuccess, onError);
+
 
 //Returns a promise to give the weather
 function getWeather() {

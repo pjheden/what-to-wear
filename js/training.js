@@ -1,23 +1,50 @@
 jQuery(document).ready(function($) {
-    var keys = getAllKeys();
-    keys.sort(sortInts);
-    console.log(keys);
-    //Load all saved data
-    if (keys.length != 0) {
-        for (var i = 0; i < keys.length; i++) {
-            generateForm(i, keys[i], getData(keys[i]));
-        }
-    } else {
-        //no existant data, TODO create stock data
-        var start_temp = -5;
-        var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
-        for (var i = 0; i < getNumbersClothes(); i++) {
-            generateForm(i, start_temp, getNumbersClothes()-i);
-            saveData(start_temp,  getNumbersClothes()-i);
-            start_temp += increment;
-        }
+
+    var data = getObject("training");
+    console.log('trainingObject', data);
+    if(data){
+      //generateForms
+      for (var i = 0; i < data.length; i++) {
+        generateForm(i, data[i].temp, data[i].clothing);
+      }
+    }else{
+      //create stock data
+      createDefaultData();
     }
+    // var keys = getAllKeys();
+    // keys.sort(sortInts);
+    // console.log(keys);
+    //Load all saved data
+    // if (keys.length != 0) {
+    //     for (var i = 0; i < keys.length; i++) {
+    //         generateForm(i, keys[i], getData(keys[i]));
+    //     }
+    // } else {
+    //     //no existant data, TODO create stock data
+    //     var start_temp = -5;
+    //     var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
+    //     for (var i = 0; i < getNumbersClothes(); i++) {
+    //         generateForm(i, start_temp, getNumbersClothes()-i);
+    //         saveData(start_temp,  getNumbersClothes()-i);
+    //         start_temp += increment;
+    //     }
+    // }
 });
+
+function createDefaultData(){
+  var start_temp = -5;
+  var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
+  var dataObjects = [];
+  for (var i = 0; i < getNumbersClothes(); i++) {
+      generateForm(i, start_temp, getNumbersClothes()-i);
+      dataObjects.push({
+        "temp": start_temp,
+        "clothing": getNumbersClothes()-i
+      });
+      start_temp += increment;
+  }
+  saveObject("training", dataObjects);
+}
 
 //Sort array of string ints
 function sortInts(a,b) {
@@ -29,16 +56,19 @@ function sortInts(a,b) {
   using k-nearest neighbours algorithm
 */
 function kNearestNeighbours(temperature) {
-    var closest_key = 999;
-    var keys = getAllKeys();
+    var closest_key = {
+      "temp": 999,
+      "clothing": undefined
+    };
+    var keys = getObject("training");
     for (var i = 0; i < keys.length; i++) {
-        if (Math.abs(temperature - keys[i]) < Math.abs(closest_key)) {
+        if (Math.abs(temperature - keys[i].temp) < Math.abs(closest_key.temp)) {
             closest_key = keys[i];
         }
     }
-    console.log('closest', closest_key);
+    console.log('closest', closest_key.temp);
     console.log('temperature', temperature);
-    return getData(closest_key);
+    return closest_key.clothing;
 }
 
 var visible = false;
@@ -67,7 +97,6 @@ function toggleTraining() {
 */
 function saveForms() {
     buttonConfirmationAnimation('saveBtn');
-
     var temps = [];
     var clothings = [];
     $('.trainingContainer input').each(function() {
@@ -77,10 +106,22 @@ function saveForms() {
         clothings.push(this.value);
     })
 
+    var dataObjects = [];
+
     for (var i = 0; i < temps.length; i++) {
-        if (temps[i] && clothings[i] && is_numeric(temps[i]))
-            saveData(temps[i], clothings[i]);
+        if (temps[i] && clothings[i] && is_numeric(temps[i])){
+          dataObjects.push({
+              "temp":  temps[i],
+              "clothing": clothings[i]
+          });
+        }
     }
+    saveObject("training", dataObjects);
+
+    // for (var i = 0; i < temps.length; i++) {
+    //     if (temps[i] && clothings[i] && is_numeric(temps[i]))
+    //         saveData(temps[i], clothings[i]);
+    // }
 }
 
 //Checks that a string holds numeric values

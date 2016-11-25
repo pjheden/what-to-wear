@@ -17,7 +17,6 @@ function isMobileUser() {
 }
 
 function weather_action() {
-  console.log('--------- weather action ---------', weatherCounter);
     if(weatherCounter > 9){
       return;
     }
