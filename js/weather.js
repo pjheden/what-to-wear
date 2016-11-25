@@ -3,6 +3,22 @@ var baseUrl = 'https://api.wunderground.com/api/';
 var country = 'Sweden';
 var city = 'Stockholm';
 
+
+var onSuccess = function(location){
+  country = location.country.names.en;
+  city = location.city.names.en; 
+};
+
+var onError = function(error){
+  alert(
+      "Error:\n\n"
+      + JSON.stringify(error, undefined, 4)
+  );
+};
+
+// geoip2.country(onSuccess, onError);
+geoip2.city(onSuccess, onError);
+
 //Returns a promise to give the weather
 function getWeather() {
     var promise = new Promise(
