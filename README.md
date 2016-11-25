@@ -23,6 +23,9 @@ CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 
 3. Make save button yellow upon any changes to suggest unsaved changes
 
+4. Accounts for saving of data globally, not per computer
+
 ## Bugfixes
 
-1. Delede training data is not working after storage-rework
+1. Delete training data is not working after storage-rework
+2. Can't use new clothing before refreshing the page
