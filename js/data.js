@@ -48,8 +48,3 @@ function getAllData() {
     }
     return data;
 }
-
-//TODO
-function getWeatherImg(){
-
-}

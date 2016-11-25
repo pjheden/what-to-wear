@@ -19,7 +19,10 @@ CSS cards: http://www.w3schools.com/w3css/w3css_cards.asp
 
 ## Future work
 
-1. Allow for custom names clothes, potentially add levels
 2. Add special warnings for downfall, i.e. snow/rain/hail
 
 3. Make save button yellow upon any changes to suggest unsaved changes
+
+## Bugfixes
+
+1. Delede training data is not working after storage-rework

@@ -1,7 +1,7 @@
-var data;
+
 jQuery(document).ready(function($) {
 
-    data = getObject("clothes");
+    var data = getObject("clothes");
     if(data){
       //generateForms
 
@@ -42,7 +42,19 @@ function createDefaultClothes(){
   return dataObjects;
 }
 
+function getAllClothes(){
+  var clothes = [];
+  clothes.push({'iconFilePath': './images/tshirt.svg', 'iconValue': 1});
+  clothes.push({'iconFilePath': './images/sweater.svg', 'iconValue': 2});
+  clothes.push({'iconFilePath': './images/thick_sweater.svg', 'iconValue': 3});
+  clothes.push({'iconFilePath': './images/coat.svg', 'iconValue': 4});
+  clothes.push({'iconFilePath': './images/woman-bikini.svg', 'iconValue': 5});
+
+  return clothes;
+}
+
 function getCloth(clothInt) {
+  var data = getObject("clothes");
   for (var i = 0; i < data.length; i++) {
     if(parseInt(data[i].value) == clothInt)
       return data[i].name;
@@ -50,6 +62,7 @@ function getCloth(clothInt) {
 }
 
 function getClothesImg(cloth) {
+  var data = getObject("clothes");
   for (var i = 0; i < data.length; i++) {
     if(parseInt(data[i].value) == cloth)
       return data[i].imgPath;
