@@ -11,6 +11,9 @@ function getWeatherKey(){
   return your_weather_key;
 }
 
+## Website
+https://people.kth.se/~pjheden/what-to-wear/
+
 ## Libraries
 
 Weather Underground for weather: https://www.wunderground.com/?apiref=c9efedbf428785a3
