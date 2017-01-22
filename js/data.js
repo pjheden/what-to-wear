@@ -48,13 +48,3 @@ function getAllData() {
     }
     return data;
 }
-
-//TODO
-function getWeatherImg(){
-
-}
-
-//TODO make dynamic
-function getNumbersClothes(){
-  return 4;
-}

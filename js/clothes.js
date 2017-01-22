@@ -1,15 +1,7 @@
-//TODO
-/*
-  1. Display all curent clothes, and allow edit of name and image.
-  2. Allow for adding new clothes
-    1. New name
-    2. upload image or use existing image
-*/
 
-var data;
 jQuery(document).ready(function($) {
 
-    data = getObject("clothes");
+    var data = getObject("clothes");
     if(data){
       //generateForms
 
@@ -50,7 +42,19 @@ function createDefaultClothes(){
   return dataObjects;
 }
 
+function getAllClothes(){
+  var clothes = [];
+  clothes.push({'iconFilePath': './images/tshirt.svg', 'iconValue': 1});
+  clothes.push({'iconFilePath': './images/sweater.svg', 'iconValue': 2});
+  clothes.push({'iconFilePath': './images/thick_sweater.svg', 'iconValue': 3});
+  clothes.push({'iconFilePath': './images/coat.svg', 'iconValue': 4});
+  clothes.push({'iconFilePath': './images/woman-bikini.svg', 'iconValue': 5});
+
+  return clothes;
+}
+
 function getCloth(clothInt) {
+  var data = getObject("clothes");
   for (var i = 0; i < data.length; i++) {
     if(parseInt(data[i].value) == clothInt)
       return data[i].name;
@@ -58,54 +62,13 @@ function getCloth(clothInt) {
 }
 
 function getClothesImg(cloth) {
+  var data = getObject("clothes");
   for (var i = 0; i < data.length; i++) {
     if(parseInt(data[i].value) == cloth)
       return data[i].imgPath;
   }
 }
 
-// //NOTE clothes are hardcoded for the moment
-// function getCloth(data) {
-//     switch (data) {
-//         case 1:
-//             return 'a T-Shirt';
-//             break;
-//         case 2:
-//             return 'a Sweater';
-//             break;
-//         case 3:
-//             return 'a thick Sweater';
-//             break;
-//         case 4:
-//             return 'a warm Jacket';
-//             break;
-//         default:
-//             return 'undefined';
-//
-//     }
-// }
-//
-// function getClothesImg(cloth){
-//   switch (cloth) {
-//       case 1:
-//           // return 'a T-Shirt';
-//           return './images/tshirt.svg';
-//           break;
-//       case 2:
-//           // return 'a Sweater';
-//           return './images/sweater.svg';
-//           break;
-//       case 3:
-//           // return 'a Thick Sweater';
-//           return './images/thick_sweater.svg';
-//           break;
-//       case 4:
-//           // return 'a warm Jacket';
-//           return './images/coat.svg';
-//           break;
-//       default:
-//           return './images/woman_bikini.svg';//only for fun
-//           // return 'undefined';
-//
-//   }
-// }
+function getNumbersClothes(){
+  return getObject("clothes").length;
+}

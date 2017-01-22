@@ -1,7 +1,7 @@
+var iconSelect;
 jQuery(document).ready(function($) {
 
     var data = getObject("training");
-    console.log('trainingObject', data);
     if(data){
       //generateForms
       for (var i = 0; i < data.length; i++) {
@@ -11,24 +11,6 @@ jQuery(document).ready(function($) {
       //create stock data
       createDefaultData();
     }
-    // var keys = getAllKeys();
-    // keys.sort(sortInts);
-    // console.log(keys);
-    //Load all saved data
-    // if (keys.length != 0) {
-    //     for (var i = 0; i < keys.length; i++) {
-    //         generateForm(i, keys[i], getData(keys[i]));
-    //     }
-    // } else {
-    //     //no existant data, TODO create stock data
-    //     var start_temp = -5;
-    //     var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
-    //     for (var i = 0; i < getNumbersClothes(); i++) {
-    //         generateForm(i, start_temp, getNumbersClothes()-i);
-    //         saveData(start_temp,  getNumbersClothes()-i);
-    //         start_temp += increment;
-    //     }
-    // }
 });
 
 function createDefaultData(){
@@ -66,8 +48,8 @@ function kNearestNeighbours(temperature) {
             closest_key = keys[i];
         }
     }
-    console.log('closest', closest_key.temp);
-    console.log('temperature', temperature);
+    // console.log('closest', closest_key.temp);
+    // console.log('temperature', temperature);
     return closest_key.clothing;
 }
 
@@ -78,14 +60,17 @@ function toggleTraining() {
         $('.trainingContainer').hide();
         $('#saveBtn').hide();
         $('#plusBtn').hide();
+        $('#clothBtn').hide();
         $('#trainBtn')[0].innerHTML = "Show";
         visible = false;
     } else {
         $('.trainingContainer').show();
         $('#saveBtn').show();
         $('#plusBtn').show();
+        $('#clothBtn').show();
         $('#trainBtn')[0].innerHTML = "Hide";
         visible = true;
+        removeClothForms();
     }
 
 }
@@ -179,4 +164,82 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     html += '</select></form></div>';
 
     $('.containerT').append(html);
+}
+
+//Add clothing
+function addCloth(){
+  toggleTraining();
+  $('#addClothDiv').show();
+  var data = getObject("clothes");
+  for (var i = 0; i < data.length; i++) {
+    generateClothingForm(data[i]);
+  }
+  generateClothingAddForm();
+}
+
+function removeClothForms(){
+  $('.clothDiv').remove();
+  $('.selected-box').remove();
+  $('#addClothDiv').hide();
+}
+
+function generateClothingForm(clothObj){
+  var html = '<div class="clothDiv" style="width:8em; height:10em; float:left; text-align:center;">';
+  html +='<img src="'+clothObj.imgPath+'" alt="'+clothObj.name+'" style="width:100%; height:60%;">';
+  html +='<p style="width:100%; height:20%; padding:10%;">'+clothObj.name+'</p>';
+  html += '</div>';
+
+  $('.containerT').append(html);
+}
+
+function generateClothingAddForm(){
+  var html;
+  var html = '<div class="clothDiv" style="width:100%; height:100%; float:left; text-align:center;">';
+  html += '<input type="text" value="" name="cloth" placeholder="Name" style="width:100%">';
+  html += '<button onclick="saveNewClothing()" class="btn btn-info" style="float:center;">Add</button>';
+  html += '</div>';
+  $('.addContainer').append(html);
+
+  iconSelect = new IconSelect("my-icon-select",
+      {'selectedIconWidth':48,
+      'selectedIconHeight':48,
+      'selectedBoxPadding':1,
+      'iconsWidth':48,
+      'iconsHeight':48,
+      'boxIconSpace':1,
+      'vectoralIconNumber':2,
+      'horizontalIconNumber':6});
+
+  var icons = [];
+  var data = getAllClothes();
+  for (var i = 0; i < data.length; i++) {
+    icons.push({'iconFilePath': data[i].iconFilePath, 'iconValue': data[i].iconValue});
+  }
+  iconSelect.refresh(icons);
+
+}
+//Save the clothing to db, add it to the list and clear input
+function saveNewClothing(){
+  var clothObj = {
+    'value': undefined,
+    'name': undefined,
+    'imgPath': undefined
+  };
+  clothObj.imgPath = iconSelect.getSelectedFilePath();
+
+  $('.clothDiv input[name="cloth"').each(function() {
+    clothObj.name = this.value;
+  });
+
+  if(clothObj.name && clothObj.imgPath){
+    //Add it to previous data and save it
+    var data = getObject("clothes");
+    clothObj.value = data.length + 1;
+    data.push(clothObj);
+    saveObject("clothes", data);
+  }
+
+  //Redraw the clothing
+  removeClothForms();
+  toggleTraining();
 }
