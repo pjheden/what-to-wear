@@ -1,35 +1,35 @@
-var iconSelect;
+// var iconSelect;
 jQuery(document).ready(function($) {
 
     var data = getObject("training");
-    if(data){
-      //generateForms
-      for (var i = 0; i < data.length; i++) {
-        generateForm(i, data[i].temp, data[i].clothing);
-      }
-    }else{
-      //create stock data
-      createDefaultData();
+    if (data) {
+        //generateForms
+        for (var i = 0; i < data.length; i++) {
+            generateForm(i, data[i].temp, data[i].clothing);
+        }
+    } else {
+        //create stock data
+        createDefaultData();
     }
 });
 
-function createDefaultData(){
-  var start_temp = -5;
-  var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
-  var dataObjects = [];
-  for (var i = 0; i < getNumbersClothes(); i++) {
-      generateForm(i, start_temp, getNumbersClothes()-i);
-      dataObjects.push({
-        "temp": start_temp,
-        "clothing": getNumbersClothes()-i
-      });
-      start_temp += increment;
-  }
-  saveObject("training", dataObjects);
+function createDefaultData() {
+    var start_temp = -5;
+    var increment = (25 + Math.abs(start_temp)) / getNumbersClothes();
+    var dataObjects = [];
+    for (var i = 0; i < getNumbersClothes(); i++) {
+        generateForm(i, start_temp, getNumbersClothes() - i);
+        dataObjects.push({
+            "temp": start_temp,
+            "clothing": getNumbersClothes() - i
+        });
+        start_temp += increment;
+    }
+    saveObject("training", dataObjects);
 }
 
 //Sort array of string ints
-function sortInts(a,b) {
+function sortInts(a, b) {
     return parseInt(a) - parseInt(b);
 }
 
@@ -39,8 +39,8 @@ function sortInts(a,b) {
 */
 function kNearestNeighbours(temperature) {
     var closest_key = {
-      "temp": 999,
-      "clothing": undefined
+        "temp": 999,
+        "clothing": undefined
     };
     var keys = getObject("training");
     for (var i = 0; i < keys.length; i++) {
@@ -94,11 +94,11 @@ function saveForms() {
     var dataObjects = [];
 
     for (var i = 0; i < temps.length; i++) {
-        if (temps[i] && clothings[i] && is_numeric(temps[i])){
-          dataObjects.push({
-              "temp":  temps[i],
-              "clothing": clothings[i]
-          });
+        if (temps[i] && clothings[i] && is_numeric(temps[i])) {
+            dataObjects.push({
+                "temp": temps[i],
+                "clothing": clothings[i]
+            });
         }
     }
     saveObject("training", dataObjects);
@@ -158,8 +158,8 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
     html += '<input type="text" name="temperature" value="' + ((celcius) ? celcius : "") + '" ' + ((hidden) ? "disabled" : "") + '><br>';
     html += 'Clothes:<br>';
     html += '<select ' + ((hidden) ? "disabled" : "") + '>';
-    for (var i = 1; i < getNumbersClothes()+1; i++) {
-      html += '<option value="' + i + '" ' + ((clothing == i) ? "selected=selected" : "") + '>' + getCloth(i) + '</option>';
+    for (var i = 1; i < getNumbersClothes() + 1; i++) {
+        html += '<option value="' + i + '" ' + ((clothing == i) ? "selected=selected" : "") + '>' + getCloth(i) + '</option>';
     }
     html += '</select></form></div>';
 
@@ -167,79 +167,116 @@ function generateForm(day, celcius = undefined, clothing = undefined, hidden = t
 }
 
 //Add clothing
-function addCloth(){
-  toggleTraining();
-  $('#addClothDiv').show();
-  var data = getObject("clothes");
-  for (var i = 0; i < data.length; i++) {
-    generateClothingForm(data[i]);
-  }
-  generateClothingAddForm();
-}
-
-function removeClothForms(){
-  $('.clothDiv').remove();
-  $('.selected-box').remove();
-  $('#addClothDiv').hide();
-}
-
-function generateClothingForm(clothObj){
-  var html = '<div class="clothDiv" style="width:8em; height:10em; float:left; text-align:center;">';
-  html +='<img src="'+clothObj.imgPath+'" alt="'+clothObj.name+'" style="width:100%; height:60%;">';
-  html +='<p style="width:100%; height:20%; padding:10%;">'+clothObj.name+'</p>';
-  html += '</div>';
-
-  $('.containerT').append(html);
-}
-
-function generateClothingAddForm(){
-  var html;
-  var html = '<div class="clothDiv" style="width:100%; height:100%; float:left; text-align:center;">';
-  html += '<input type="text" value="" name="cloth" placeholder="Name" style="width:100%">';
-  html += '<button onclick="saveNewClothing()" class="btn btn-info" style="float:center;">Add</button>';
-  html += '</div>';
-  $('.addContainer').append(html);
-
-  iconSelect = new IconSelect("my-icon-select",
-      {'selectedIconWidth':48,
-      'selectedIconHeight':48,
-      'selectedBoxPadding':1,
-      'iconsWidth':48,
-      'iconsHeight':48,
-      'boxIconSpace':1,
-      'vectoralIconNumber':2,
-      'horizontalIconNumber':6});
-
-  var icons = [];
-  var data = getAllClothes();
-  for (var i = 0; i < data.length; i++) {
-    icons.push({'iconFilePath': data[i].iconFilePath, 'iconValue': data[i].iconValue});
-  }
-  iconSelect.refresh(icons);
-
-}
-//Save the clothing to db, add it to the list and clear input
-function saveNewClothing(){
-  var clothObj = {
-    'value': undefined,
-    'name': undefined,
-    'imgPath': undefined
-  };
-  clothObj.imgPath = iconSelect.getSelectedFilePath();
-
-  $('.clothDiv input[name="cloth"').each(function() {
-    clothObj.name = this.value;
-  });
-
-  if(clothObj.name && clothObj.imgPath){
-    //Add it to previous data and save it
+function addCloth() {
+    toggleTraining();
+    $('#addClothDiv').show();
     var data = getObject("clothes");
-    clothObj.value = data.length + 1;
-    data.push(clothObj);
-    saveObject("clothes", data);
-  }
-
-  //Redraw the clothing
-  removeClothForms();
-  toggleTraining();
+    //generateClothingForm(data);
+    generateClothingAddForm();
 }
+
+function removeClothForms() {
+    $('.clothDiv').remove();
+    $('.selected-box').remove();
+    $('#addClothDiv').hide();
+}
+
+//Create the selection of creating a new clothing
+function generateClothingAddForm() {
+    var html = '<div class="clothDiv" style="width:100%; height:100%; float:left; text-align:center;">';
+    html += '<input type="text" value="" name="cloth" placeholder="Name" style="width:100%">';
+    html += '<button onclick="saveNewClothing()" class="btn btn-info" style="float:center;">Add</button>';
+    html += '</div>';
+    $('.addContainer').append(html);
+
+
+    var html = '<div> ';
+    var data = getAllClothes();
+    for (var i = 0; i < data.length; i++) {
+        var id = 'imgId' + i;
+        html += '<img src="' + data[i].iconFilePath + '"id = "'+id+'"';
+        html += 'alt="Clothing" style="width:40%; height:15%;">';
+    }
+    html += '</div>';
+    $('.containerT').append(html);
+    makeImgsClickable();
+}
+
+function makeImgsClickable(){
+  $('img').click(function(){
+      $('.selected').removeClass('selected');
+      $(this).addClass('selected');
+  });
+}
+
+//Shows all the existing cloth types
+function generateClothingForm(clothObjs) {
+    var html = '<div> ';
+    for (var i = 0; i < clothObjs.length; i++) {
+        html += '<img src="' + clothObjs[i].imgPath + '" alt="' + clothObjs[i].name + '" style="width:100%; height:60%;">';
+        html += '<p " value="' + i + '"> ' + clothObjs[i].name + '</p>';
+    }
+    html += '</div>';
+    $('.containerT').append(html);
+}
+
+// function generateClothingForm(clothObj){
+//   var html = '<div class="clothDiv" style="width:8em; height:10em; float:left; text-align:center;">';
+//   html +='<img src="'+clothObj.imgPath+'" alt="'+clothObj.name+'" style="width:100%; height:60%;">';
+//   html +='<p style="width:100%; height:20%; padding:10%;">'+clothObj.name+'</p>';
+//   html += '</div>';
+//
+//   $('.containerT').append(html);
+// }
+
+// function generateClothingAddForm(){
+//   var html;
+//   var html = '<div class="clothDiv" style="width:100%; height:100%; float:left; text-align:center;">';
+//   html += '<input type="text" value="" name="cloth" placeholder="Name" style="width:100%">';
+//   html += '<button onclick="saveNewClothing()" class="btn btn-info" style="float:center;">Add</button>';
+//   html += '</div>';
+//   $('.addContainer').append(html);
+//
+//   iconSelect = new IconSelect("my-icon-select",
+//       {'selectedIconWidth':48,
+//       'selectedIconHeight':48,
+//       'selectedBoxPadding':1,
+//       'iconsWidth':48,
+//       'iconsHeight':48,
+//       'boxIconSpace':1,
+//       'vectoralIconNumber':2,
+//       'horizontalIconNumber':6});
+//
+//   var icons = [];
+//   var data = getAllClothes();
+//   for (var i = 0; i < data.length; i++) {
+//     icons.push({'iconFilePath': data[i].iconFilePath, 'iconValue': data[i].iconValue});
+//   }
+//   iconSelect.refresh(icons);
+//
+// }
+// //Save the clothing to db, add it to the list and clear input
+// function saveNewClothing(){
+//   var clothObj = {
+//     'value': undefined,
+//     'name': undefined,
+//     'imgPath': undefined
+//   };
+//   clothObj.imgPath = iconSelect.getSelectedFilePath();
+//
+//   $('.clothDiv input[name="cloth"').each(function() {
+//     clothObj.name = this.value;
+//   });
+//
+//   if(clothObj.name && clothObj.imgPath){
+//     //Add it to previous data and save it
+//     var data = getObject("clothes");
+//     clothObj.value = data.length + 1;
+//     data.push(clothObj);
+//     saveObject("clothes", data);
+//   }
+//
+//   //Redraw the clothing
+//   removeClothForms();
+//   toggleTraining();
+// }
